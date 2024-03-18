@@ -777,6 +777,8 @@ class AlphabetHints {
         marker.hintString = hintStrings[i];
         if (marker.isLocalMarker()) {
           marker.element.innerHTML = spanWrap(marker.hintString.toUpperCase());
+          const xPath = marker.localHint ? getXPath(marker.localHint.element) : null
+          xPath && marker.element.setAttribute("data-xpath", xPath);
         }
       }
     }
