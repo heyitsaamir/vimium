@@ -332,6 +332,17 @@ if (typeof LinkHints !== "undefined") {
   });
 }
 
+window.addEventListener("message", function(event) {
+  // We only accept messages from ourselves
+  if (event.source != window)
+      return;
+
+  if (event.data.type && (event.data.type == "ACTIVATE_VIMIUM")) {
+    console.log("Content script received: " + event.data.text);
+    LinkHints.activateMode(null, {})
+  }
+});
+
 if (typeof Vomnibar !== "undefined") {
   Object.assign(NormalModeCommands, {
     "Vomnibar.activate": Vomnibar.activate.bind(Vomnibar),
