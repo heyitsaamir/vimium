@@ -337,10 +337,11 @@ window.addEventListener("message", function(event) {
   if (event.source != window)
       return;
 
-  if (event.data.type && (event.data.type == "ACTIVATE_VIMIUM")) {
-    console.log("Content script received: " + event.data.text);
-    LinkHints.activateMode(null, {})
-  }
+    if (event.data.type && (event.data.type == "ACTIVATE_VIMIUM")) {
+      LinkHints.activateMode(null, {})
+    } else if (event.data.type && (event.data.type == "DEACTIVATE_VIMIUM")) {
+      HintCoordinator.exit({isSuccess: true})
+    }
 });
 
 if (typeof Vomnibar !== "undefined") {
